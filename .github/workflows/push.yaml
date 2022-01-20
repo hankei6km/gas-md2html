@@ -37,8 +37,12 @@ jobs:
             ${{ runner.os }}-push-${{ env.cache-name }}-
             ${{ runner.os }}-push-
 
+      - name: Install clasp
+        # バージョン固定した方がよいか ?
+        run: npm install -g @google/clasp
+
       - name: Install modules
-        run: npm install
+        run: npm ci
 
       - name: Run tests
         run: npm run test
