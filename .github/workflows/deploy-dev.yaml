@@ -62,7 +62,7 @@ jobs:
         run: npm run push
 
       - name: Deploy HEAD in gas project
-        run: npm run deploy -- --description "$(echo ${{ github.event.release.body }} | head -n 1 | tr -d '\n')"
+        run: npm run deploy -- --description "$(echo "${{ github.event.release.body }}" | head -n 1 | tr -d '\n')"
 
       # 念のため実行.
       - name: Cleanup files for clasp
