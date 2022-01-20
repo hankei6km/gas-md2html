@@ -4,7 +4,6 @@ set -e
 CLASPRC_JSON="${HOME}/.clasprc_tmp.json"
 
 if test -f "${CLASPRC_JSON}"; then
-  pwd
   echo "push with ${CLASPRC_JSON}"
   clasp push --auth "${CLASPRC_JSON}"
 else
