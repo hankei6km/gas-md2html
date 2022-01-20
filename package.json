@@ -19,10 +19,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "setup:clasp": "bash scripts/setup-clasp.sh",
+    "setup:clasp": "bash scripts/setup-clasp.sh && bash scripts/setup-clasprc.sh",
+    "cleanup:clasp": "rimraf .clasp.json .clasprc.json",
     "clean": "rimraf build/*",
     "build": "npm run clean && rollup --config && cat build/main.js src/index.js > build/md2html.js && rimraf build/main.js build/src build/test",
-    "push": "npm run setup:clasp && clasp push",
+    "push": "bash scripts/clasp-push.sh",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "dependencies": {

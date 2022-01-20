@@ -1,9 +1,10 @@
 # https://github.com/marketplace/actions/run-jest
-name: test
+name: Push to gas project
 on:
   push:
     branches:
       - "**"
+      - "!main"
     tags:
       - "!v*"
 
@@ -29,15 +30,27 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          # npm キャッシュファイルは Linux/macOS の「~/.npm」に保存される
           path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-push-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
+            ${{ runner.os }}-push-${{ env.cache-name }}-
+            ${{ runner.os }}-push-
 
       - name: Install modules
         run: npm install
 
       - name: Run tests
         run: npm run test
+
+      - name: Build files to push gas project
+        run: npm run build
+
+      - name: Setup files for clasp
+        run: npm run setup:clasp
+
+      - name: Push source files to gas project
+        run: npm run push
+
+      # 念のため実行.
+      - name: Cleanup files for clasp
+        run: npm run cleanup:clasp
