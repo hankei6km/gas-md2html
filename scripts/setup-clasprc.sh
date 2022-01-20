@@ -33,4 +33,4 @@ jq '.token.access_token = env.ACCESS_TOKEN' scripts/clasprc_src.json \
   | jq '.token.refresh_token = env.REFRESH_TOKEN' \
   | jq '.oauth2ClientSettings.clientId = env.CLIENT_ID' \
   | jq '.oauth2ClientSettings.clientSecret = env.CLIENT_SECRET' \
-  > .clasprc.json
+  > "${HOME}/.clasprc_tmp.json"
