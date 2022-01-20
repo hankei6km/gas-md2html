@@ -9,8 +9,9 @@ on:
       - "!v*"
 
 jobs:
-  jest:
+  push-to-gas:
     runs-on: ubuntu-latest
+    environment: dev
 
     strategy:
       matrix:
