@@ -1,0 +1,70 @@
+name: Deploy gas project(dev)
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  push-to-gas:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # https://docs.github.com/ja/free-pro-team@latest/actions/guides/caching-dependencies-to-speed-up-workflows
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-deploy-dev-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-deploy-dev-${{ env.cache-name }}-
+            ${{ runner.os }}-deploy-dev-
+
+      - name: Install clasp
+        # バージョン固定した方がよいか ?
+        run: npm install -g @google/clasp
+
+      - name: Install modules
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build files to push gas project
+        run: npm run build
+
+      - name: Setup files for clasp
+        run: npm run setup:clasp
+        env:
+          GAS_SCRIPT_ID: ${{ secrets.GAS_SCRIPT_ID }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          SCOPE: ${{ secrets.SCOPE }}
+          ID_TOKEN: ${{ secrets.ID_TOKEN }}
+          EXPIRY_DATE: ${{ secrets.EXPIRY_DATE }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+
+      - name: Push source files to gas project
+        run: npm run push
+
+      # description を渡すかもしれないので npm script にはしていない.
+      - name: Deploy HEAD in gas project
+        run: bash scripts/clasp-with-auth.sh deploy
+
+      # 念のため実行.
+      - name: Cleanup files for clasp
+        run: npm run cleanup:clasp

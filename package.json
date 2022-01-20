@@ -23,7 +23,7 @@
     "cleanup:clasp": "bash scripts/cleanup-clasp.sh",
     "clean": "rimraf build/*",
     "build": "npm run clean && rollup --config && cat build/main.js src/index.js > build/md2html.js && rimraf build/main.js build/src build/test",
-    "push": "bash scripts/clasp-push.sh",
+    "push": "bash scripts/clasp-with-auth.sh push",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "dependencies": {
