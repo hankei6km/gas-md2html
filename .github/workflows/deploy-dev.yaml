@@ -61,9 +61,8 @@ jobs:
       - name: Push source files to gas project
         run: npm run push
 
-      # description を渡すかもしれないので npm script にはしていない.
       - name: Deploy HEAD in gas project
-        run: bash scripts/clasp-with-auth.sh deploy
+        run: npm run deploy -- --description "$(echo ${{ github.event.release.body }} | head -n 1 | tr -d '\n')"
 
       # 念のため実行.
       - name: Cleanup files for clasp
