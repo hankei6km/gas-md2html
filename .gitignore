@@ -118,5 +118,7 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/node
 
 .clasp.json
+.clasprc.json
+/md2html.zip
 /tmp/
 /build/
