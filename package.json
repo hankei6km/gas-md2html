@@ -22,7 +22,7 @@
     "setup:clasp": "bash scripts/setup-clasp.sh && bash scripts/setup-clasprc.sh",
     "cleanup:clasp": "bash scripts/cleanup-clasp.sh",
     "clean": "rimraf build/*",
-    "build": "npm run clean && rollup --config && cat build/main.js src/index.js > build/md2html.js && rimraf build/main.js build/src build/test",
+    "build": "npm run clean && rollup --config && cat build/main.js src/index.js > build/md2html.js && cp LICENSE build/LICENSE.txt && rimraf build/main.js build/src build/test",
     "push": "bash scripts/clasp-with-auth.sh push",
     "deploy": "bash scripts/clasp-with-auth.sh deploy",
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
@@ -41,6 +41,7 @@
     "jest": "^27.4.7",
     "rimraf": "^3.0.2",
     "rollup": "^2.64.0",
+    "rollup-plugin-license": "^2.6.1",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
     "tslib": "^2.3.1",
