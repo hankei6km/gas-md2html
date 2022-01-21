@@ -119,5 +119,6 @@ dist
 
 .clasp.json
 .clasprc.json
+/md2html.zip
 /tmp/
 /build/

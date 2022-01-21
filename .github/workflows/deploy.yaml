@@ -1,4 +1,4 @@
-name: Deploy(push) project in GAS
+name: Deploy(push) project in GAS and Upload files to release on repo
 on:
   release:
     types:
@@ -88,3 +88,21 @@ jobs:
       # 念のため実行.
       - name: Cleanup files for clasp
         run: npm run cleanup:clasp
+
+      # 以下、リリースに build したファイルをアップロード
+      # matrix が rel のときのみ
+      - name: Make archilve file
+        if: ${{ matrix.environment == 'rel' }}
+        run: zip "./md2html.zip" build/*
+
+      - name: Upload archive file to release Asset
+        id: upload-release-asset
+        if: ${{ matrix.environment == 'rel' }}
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./md2html.zip
+          asset_name: md2html.zip
+          asset_content_type: application/zip
