@@ -1,25 +1,45 @@
-name: Deploy gas project(dev)
+name: Deploy(push) project in GAS
 on:
   release:
     types:
       - published
 
 jobs:
-  push-to-gas:
+  deploy-gas-project:
+    # prerelease は除外.
+    if: ${{ github.event.release.prerelease ==  false }}
     runs-on: ubuntu-latest
-    environment: dev
 
+    # 開発と公開どちらも同じデプロイ(バージョンの割り当て)にさせる.
     strategy:
       matrix:
-        node-version: [14.x]
+        include:
+          - environment: dev
+          - environment: rel
+
+    # https://github.community/t/environment-name-does-not-support-matrix/150331/3
+    environment:
+      name: ${{ matrix.environment }}
 
     steps:
+      # prerelease 的な文字が含まれていたら失敗させる.
+      - name: Check name and tag_name
+        if: >-
+          ${{ contains(github.event.release.name, 'p') ||
+          contains(github.event.release.tag_name, 'p') ||
+          contains(github.event.release.name, '-') ||
+          contains(github.event.release.tag_name, '-') }}
+        run: |
+          echo 'name: ${{ github.event.release.name }}'
+          echo 'tag_name: ${{ github.event.release.tag_name }}'
+          exit 1
+
       - uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
 
       # https://docs.github.com/ja/free-pro-team@latest/actions/guides/caching-dependencies-to-speed-up-workflows
       - name: Cache node modules
@@ -61,6 +81,7 @@ jobs:
       - name: Push source files to gas project
         run: npm run push
 
+      # version は自動採番にまかせる.
       - name: Deploy HEAD in gas project
         run: npm run deploy -- --description "$(echo "${{ github.event.release.body }}" | head -n 1 | tr -d '\n')"
 
