@@ -1,5 +1,4 @@
-# https://github.com/marketplace/actions/run-jest
-name: Push to gas project
+name: Push to GAS project
 on:
   push:
     branches:
@@ -13,17 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: dev
 
-    strategy:
-      matrix:
-        node-version: [14.x]
-
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js 14.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
 
       # https://docs.github.com/ja/free-pro-team@latest/actions/guides/caching-dependencies-to-speed-up-workflows
       - name: Cache node modules
