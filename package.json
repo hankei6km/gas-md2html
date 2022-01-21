@@ -28,6 +28,7 @@
     "test": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "dependencies": {
+    "hast-util-sanitize": "^4.0.0",
     "hast-util-to-html": "^8.0.3",
     "mdast-util-from-markdown": "^1.2.0",
     "mdast-util-to-hast": "^12.1.0"
