@@ -1,5 +1,5 @@
-const _toHtml = _entry_point.toHtml;
-const _toHtml_unsafe = _entry_point.toHtml_unsafe;
+const _toHtml = _entry_point.toHtml
+const _toHtml_unsafe = _entry_point.toHtml_unsafe
 
 /**
  * Mardkdown を HTML へ変換.
@@ -8,7 +8,7 @@ const _toHtml_unsafe = _entry_point.toHtml_unsafe;
  * @returns {string}
  */
 function toHtml(md) {
-  return _toHtml(md);
+  return _toHtml(md)
 }
 
 /**
@@ -18,7 +18,7 @@ function toHtml(md) {
  * @returns {string}
  */
 function toHtml_unsafe(md) {
-  return _toHtml_unsafe(md);
+  return _toHtml_unsafe(md)
 }
 
-delete _entry_point;
+delete _entry_point
