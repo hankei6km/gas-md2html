@@ -24,6 +24,7 @@ test test
 `)
     ).toEqual(`<h1>test1</h1>
 <script>alert('danger')</script>
+
 <p>test test</p>`)
   })
 })
