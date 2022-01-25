@@ -2,10 +2,10 @@ name: Push to GAS project
 on:
   push:
     branches:
-      - "**"
-      - "!main"
+      - '**'
+      - '!main'
     tags:
-      - "!v*"
+      - '!v*'
 
 jobs:
   push-to-gas:
@@ -40,9 +40,10 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm run test
+        run: npm run test:build
 
       - name: Build files to push gas project
+        # テスト用にビルドされたものが存在するが再度ビルドする.
         run: npm run build
 
       - name: Setup files for clasp
