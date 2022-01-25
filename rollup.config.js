@@ -10,8 +10,8 @@ export default {
   input: './src/main.ts',
   output: {
     dir: 'build',
-    format: 'umd',
-    name: '_entry_point'
+    format: 'iife',
+    name: '_entry_point_'
   },
   plugins: [
     typescript(),
