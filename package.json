@@ -25,7 +25,8 @@
     "build": "npm run clean && rollup --config && cat scripts/banner.txt build/main.js src/index.js > build/md2html.js && cp LICENSE build/LICENSE.txt && rimraf build/main.js build/src build/test",
     "push": "bash scripts/clasp-with-auth.sh push",
     "deploy": "bash scripts/clasp-with-auth.sh deploy",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "test:build": "npm run build && bash scripts/test-build.sh"
   },
   "dependencies": {
     "hast-util-raw": "^7.2.1",
