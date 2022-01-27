@@ -14,7 +14,8 @@
     "pretty": true,
     "newLine": "lf",
     "outDir": "build",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowJs":true
   },
   "exclude": ["node_modules", "src/**/*.test.ts"],
   "include": ["src/**/*.ts","test/**/*.ts"]
