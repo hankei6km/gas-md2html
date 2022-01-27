@@ -1,9 +1,33 @@
-///<reference path="./index_src.js" />
+/**
+ * @typedef {string|number|Array<Array<string|number>>|undefined} MarkdownSource - Markdown ソース. Array の場合は '\n' で join される.
+ */
+type MarkdownSource = string | number | (string | number)[][] | undefined
 
-// Apps Script のエディターで @typedef が認識されなかった.
-// reference path で読み込んだ @typedef を export する方法が不明.
-// declare の中で関数の定義で関数を定義する方法が不明.
+// 未定義エラー回避のよくない対応.
+// 実際は rollupjs でビルドしたファイルで定義されている.
+declare var _entry_point_: any
 
+/**
+ * Mardkdown を HTML へ変換.
+ *
+ * @param {string|number|Array<Array<string|number>>|undefined} md
+ * @returns {string}
+ */
+function toHtml(md: MarkdownSource): string {
+  return _entry_point_.toHtml(md)
+}
+
+/**
+ * Mardkdown を HTML へ変換(sanitize 無し).
+ *
+ * @param {string|number|Array<Array<string|number>>|undefined} md
+ * @returns {string}
+ */
+function toHtml_unsafe(md: MarkdownSource): string {
+  return _entry_point_.toHtml_unsafe(md)
+}
+
+// 循環参照回避用.
 type EntryPoint = {
   toHtml: typeof toHtml
   toHtml_unsafe: typeof toHtml_unsafe
