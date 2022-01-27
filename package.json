@@ -1,15 +1,15 @@
 {
-  "name": "gas-md2html",
+  "name": "@hankei6km/gas-md2html",
   "version": "0.4.0",
   "description": "Google Apps Script library to convert Markdonw to HTML",
-  "author": "",
+  "author": "hankei6km <hankei6km@gmail.com> (https://github.com/hankei6km)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/<user>/<repository>.git"
+    "url": "git://github.com/hankei6km/gas-md2html.git"
   },
   "bugs": {
-    "url": "https://github.com/<user>/<repository>/issues"
+    "url": "https://github.com/hankei6km/gas-md2html/issues"
   },
   "config": {
     "namespace": "MD2html",
