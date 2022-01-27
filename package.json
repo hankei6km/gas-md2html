@@ -22,6 +22,7 @@
   ],
   "main": "index.js",
   "type": "module",
+  "types": "index.d.ts",
   "scripts": {
     "setup:clasp": "bash scripts/setup-clasp.sh && bash scripts/setup-clasprc.sh",
     "cleanup:clasp": "bash scripts/cleanup-clasp.sh",
