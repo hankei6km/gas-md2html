@@ -5,7 +5,7 @@
     "lib": [ "ESNext" ],
     "types": [
        "@types/jest",
-       "google-apps-script",
+       "@types/google-apps-script",
     ],
     "moduleResolution": "node",
     "strict": true,
