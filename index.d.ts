@@ -1,21 +1,4 @@
-/**
- * @typedef {string|number|Array<Array<string|number>>|undefined} MarkdownSource - Markdown ソース. Array の場合は '\n' で join される.
- */
-declare type MarkdownSource = string | number | (string | number)[][] | undefined;
-/**
- * Mardkdown を HTML へ変換.
- *
- * @param {string|number|Array<Array<string|number>>|undefined} md
- * @returns {string}
- */
-declare function toHtml(md: MarkdownSource): string;
-/**
- * Mardkdown を HTML へ変換(sanitize 無し).
- *
- * @param {string|number|Array<Array<string|number>>|undefined} md
- * @returns {string}
- */
-declare function toHtml_unsafe(md: MarkdownSource): string;
+/// <reference path="index_src.d.ts" />
 declare type EntryPoint = {
     toHtml: typeof toHtml;
     toHtml_unsafe: typeof toHtml_unsafe;
