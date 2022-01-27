@@ -1,3 +1,4 @@
+///<reference path="./index.js" />
 import { Root, Content } from 'hast'
 import { fromMarkdown } from 'mdast-util-from-markdown'
 import { toHast } from 'mdast-util-to-hast'
@@ -7,8 +8,10 @@ import { raw } from 'hast-util-raw'
 import { sanitize } from 'hast-util-sanitize'
 import { toHtml } from 'hast-util-to-html'
 
-// この型を gas 側のコード(JSDoc の記述)で使う方法は ?
-type MarkdownSource = string | number | (string | number)[][] | undefined
+// index.js の定義を参照する.
+// - 定義が分散しているのが面白くない
+// - Apps Script のエディターでは @typedef を認識しない
+// type MarkdownSource = string | number | (string | number)[][] | undefined
 
 function md2hast(md: string) {
   const mdast = fromMarkdown(md, {

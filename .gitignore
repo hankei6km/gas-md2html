@@ -123,3 +123,4 @@ dist
 /tmp/
 /build/
 /test/build/md2html.spec.js
+/index.d.ts
